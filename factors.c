@@ -9,14 +9,15 @@ void factor_op(char *input)
 
 	for (i = 2; i <= num; i++)
 	{
-		while (num % i == 0)
+		if (num % i == 0)
 		{
 			if (pair_count < 1)
 			{
 				printf("%d=%d*%d\n", num, i, num / i);
 				pair_count++;
 			}
-			num /= i;
+			else
+				break;
 		}
 	}
 }
