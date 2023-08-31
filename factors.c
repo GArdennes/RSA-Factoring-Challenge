@@ -41,14 +41,11 @@ int main(int argc, char **argv)
 		return (1);
 	}
 
-	if ((read = getline(&input, &size, file)) != -1)
+	while ((read = getline(&input, &size, file)) != -1)
 	{
 		content = strtok(input, "\n");
-		while (content)
-		{
-			factor_op(content);
-			content = strtok(NULL, "\n");
-		}
+		factor_op(content);
+		content = strtok(NULL, "\n");
 	}
 	free(input);
 	free(content);
