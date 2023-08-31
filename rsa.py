@@ -1,17 +1,24 @@
 #!/usr/bin/python3
 import sys
-import gmpy2
+import random
+import math
+
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
 
 def pollards_rho(n):
-    x = gmpy2.random_state(seed=123).mpz_random(n)
+    x = random.randint(1, n - 1)
     y = x
-    c = gmpy2.random_state(seed=456).mpz_random(n)
+    c = random.randint(1, n - 1)
     d = 1
 
     while d == 1:
         x = (x * y + c) % n
         y = (y * y + c) % n
-        d = gmpy2.gcd(abs(x - y), n)
+        y = (y * y + c) % n
+        d = gcd(abs(x - y), n)
     return d
 
 def find_prime_factors(n):
@@ -27,7 +34,7 @@ def main():
     with open(sys.argv[1], "r") as file:
         rsa_number_str = file.readline().strip()
 
-    n = gmpy2.mpz(rsa_number_str)
+    n = int(rsa_number_str)
     factors = find_prime_factors(n)
     print("{}={}*{}".format(rsa_number_str, factos[0], factors[1]))
 
