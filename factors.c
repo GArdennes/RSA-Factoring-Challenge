@@ -16,6 +16,7 @@ void factor_op(char *input)
 				printf("%d=%d*%d\n", num, i, num / i);
 				pair_count++;
 			}
+			num /= i;
 		}
 	}
 }
@@ -42,11 +43,11 @@ int main(int argc, char **argv)
 
 	if ((read = getline(&input, &size, file)) != -1)
 	{
-		content = strtok(input, " \n");
+		content = strtok(input, "\n");
 		while (content)
 		{
 			factor_op(content);
-			content = strtok(NULL, " \n");
+			content = strtok(NULL, "\n");
 		}
 	}
 	free(input);
