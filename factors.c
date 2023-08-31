@@ -5,14 +5,17 @@
 
 void factor_op(char *input)
 {
-	int num = atoi(input), i;
+	int num = atoi(input), i, pair_count = 0;
 
 	for (i = 2; i <= num; i++)
 	{
 		while (num % i == 0)
 		{
-			printf("%d=%d*%d\n", num, i, num / i);
-			num /= i;
+			if (pair_count < 1)
+			{
+				printf("%d=%d*%d\n", num, i, num / i);
+				pair_count++;
+			}
 		}
 	}
 }
@@ -22,7 +25,7 @@ int main(int argc, char **argv)
 	size_t size = 0;
 	int read;
 	FILE *file;
-	char *input = NULL;
+	char *input = NULL, *content = NULL;
 
 	if (argc != 2)
 	{
@@ -37,13 +40,17 @@ int main(int argc, char **argv)
 		return (1);
 	}
 
-	while ((read = getline(&input, &size, file)) != -1)
+	if ((read = getline(&input, &size, file)) != -1)
 	{
-		if (input[read - 1] == '\n')
-			input[read - 1] = '\0';
-		factor_op(input);
+		content = strtok(input, " \n");
+		while (content)
+		{
+			factor_op(content);
+			content = strtok(NULL, " \n");
+		}
 	}
 	free(input);
+	free(content);
 	fclose(file);
 	return (0);
 }
