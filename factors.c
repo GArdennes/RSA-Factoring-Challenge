@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,7 +20,7 @@ void factor_op(char *input)
 int main(int argc, char **argv)
 {
 	size_t size = 0;
-	ssize_t read;
+	int read;
 	FILE *file;
 	char *input = NULL;
 
