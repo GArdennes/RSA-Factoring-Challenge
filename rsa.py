@@ -36,7 +36,9 @@ def main():
 
     n = int(rsa_number_str)
     factors = find_prime_factors(n)
-    print("{}={}*{}".format(rsa_number_str, factos[0], factors[1]))
+
+    if len(factors) >= 2:
+        print("{}={}*{}".format(rsa_number_str, factors[0], factors[1]))
 
 if __name__== "__main__":
     main()
